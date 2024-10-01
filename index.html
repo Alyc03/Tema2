@@ -1,0 +1,138 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="index.css">
+    <title>Document</title>
+</head>
+<body>
+    <header><h1>Buna ziua!</h1></header>
+    <br>
+    <p>
+        <label for="numele_orasului">Numele orasului:</label>
+        <input type="text" minlength="7" oninput="afiseaza_button()" id="numele_orasului" name="numele_orasului"><br>
+        <label for="numar_locuitori">Numar locuitori:</label>
+        <input type="number" id="numar_locuitori" name="numar_locuitori"><br>
+    </p>
+    
+    <p2>
+        <form id="form1">
+            <label for="municipiu">Municipiu</label>
+            <input type="radio" id="municipiu"><br>
+            <label for="resedinta_de_judet">Resedinta de judet</label>
+            <input type="radio" id="resedinta_de_judet">
+        </form>
+    </p2>
+    <br><br>
+    <p3>
+        <form id="form2">
+            <label for="stadion">Are stadion</label>
+            <input type="checkbox" id="stadion"value="1"><br>
+            <label for="teatru">Are teatru</label>
+            <input type="checkbox" id="teatru" value="2"><br>
+            <label for="biblioteca">Are biblioteca</label>
+            <input type="checkbox" id="biblioteca" value="3"><br>
+            <label for="cinema">Are cinema</label>
+            <input type="checkbox" id="cinema" value="4"><br>
+
+        </form>
+    </p3>
+    <br><br>
+    <button disabled id="buton_salveaza" onclick="oras.salveaza_oras()">Salveaza</button>
+
+    <br>
+    <br>
+    <br>
+    <button disabled id="buton_afiseaza"  onclick="afiseaza()">Afiseaza!</button>
+    <p id="print_oras"></p>
+
+
+
+
+<script>
+
+document.getElementById("municipiu").checked = true
+
+function afiseaza_button(){
+    let lungime_text = document.getElementById("numele_orasului").value.length
+
+    if(lungime_text < 7){
+        document.getElementById("buton_afiseaza").disabled = true
+        document.getElementById("buton_salveaza").disabled = true
+    }
+    else {
+        document.getElementById("buton_afiseaza").disabled = false
+        document.getElementById("buton_salveaza").disabled = false
+    }
+
+}
+
+let oras = {
+    nume_oras: "",
+    numar_loc: "",
+    res_mun: "",
+    stadion: "",
+    teatru: "",
+    biblioteca: "",
+    cinema: "",
+    
+
+    salveaza_oras: function() {
+        this.nume_oras = document.getElementById("numele_orasului").value
+        this.numar_loc = document.getElementById("numar_locuitori").value
+        this.res_mun = 0
+        this.stadion = 0
+        this.teatru = 0
+        this.biblioteca = 0
+        this.cinema = 0
+        let check = document.getElementById("municipiu").checked
+        let check1 = document.getElementById("stadion").checked
+        let check2 = document.getElementById("teatru").checked
+        let check3 = document.getElementById("biblioteca").checked
+        let check4 = document.getElementById("cinema").checked
+        if(check === true){
+            this.res_mun='Municipiu'
+        }
+        else if(check === false)
+        {
+            this.res_mun = 'Resedinta de judet'
+        }
+        if(check1 === true){
+            this.stadion = 'Are stadion.'
+        }
+        else if(check1 === false){
+            this.stadion = 'Nu are stadion.'
+        }
+        if(check2 === true){
+            this.teatru = 'Are teatru.'
+        }
+        else if(check2 === false){
+            this.teatru = 'Nu are teatru.'
+        }
+        if(check3 === true){
+            this.biblioteca = 'Are biblioteca.'
+        }
+        else if(check3 === false){
+            this.biblioteca = 'Nu are biblioteca.'
+        }
+        if(check4 === true){
+            this.cinema = 'Are cinema.'
+        }
+        else if(check4 === false){
+            this.cinema = 'Nu are cinema.'
+        }
+
+        
+        
+    }   
+}
+
+function afiseaza(){
+    document.getElementById("print_oras").innerHTML =
+    'Nume: ' + oras.nume_oras + '<br>' + 'Populatie: ' + oras.numar_loc + '<br>' 
+    + 'Este ' + oras.res_mun + '<br>' + oras.stadion + '<br>' + oras.teatru + '<br>' + oras.biblioteca + '<br>' + oras.cinema
+}
+</script>
+</body>
+</html>
